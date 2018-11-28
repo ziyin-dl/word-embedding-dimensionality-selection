@@ -25,7 +25,7 @@ Currently, we implement the dimensionality selection procedure for the following
 - GloVe
 - Latent Semantic Analysis (LSA)
 
-## How to use
+## How to use the tool
 The tool provides an optimal dimensionality for an algorithm on a corpus. For example, you can use it to
 obtain the dimensionality for your Word2Vec embedding on the Text8 corpus.
 You need to have the following:
@@ -34,10 +34,8 @@ You need to have the following:
 - Name of algorithm (--algorithm [algorithm_name])
 
 Run from root directory as package, e.g.:
-`python -m main --file data/text8.zip --config_file word2vec_sample_config.yml --algorithm word2vec`
 
-testing:
-`python -m unittest test.test_tokenizer`
+`python -m main --file data/text8.zip --config_file word2vec_sample_config.yml --algorithm word2vec`
 
 ## Implement your own
 You can extend the implementation if you have another embedding algorithm that is based on matrix factorization.
