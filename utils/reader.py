@@ -4,7 +4,6 @@ from __future__ import print_function
 
 import zipfile
 import cPickle as pickle
-from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
 
 class ZipFileReader():

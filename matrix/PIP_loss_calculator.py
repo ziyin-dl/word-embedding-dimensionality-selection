@@ -2,21 +2,15 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import collections
-import subprocess as sp
-import math
-import os
-import random
 import cPickle as pickle
-import numpy as np
-from six.moves import xrange  # pylint: disable=redefined-builtin
-import bisect
+import os
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import argparse
-import yaml
+import numpy as np
+import random
 import time
+import yaml
 
 
 class MonteCarloEstimator():

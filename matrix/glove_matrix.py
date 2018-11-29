@@ -3,12 +3,8 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import cPickle as pickle
 import numpy as np
-import subprocess as sp
 import warnings
-
-from six.moves import xrange  # pylint: disable=redefined-builtin
 
 from matrix.signal_matrix import SignalMatrix
 
@@ -40,7 +36,6 @@ class GloVeMatrix(SignalMatrix):
 
     def construct_matrix(self, data):
         cooccur, vocabulary_size = self.build_cooccurance_dict(data)
-        k = self._params["neg_samples"]
 
         Nij = np.ones([vocabulary_size, vocabulary_size])
         for i in range(vocabulary_size):

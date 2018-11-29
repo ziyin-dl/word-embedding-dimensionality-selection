@@ -3,12 +3,8 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import cPickle as pickle
 import numpy as np
-import subprocess as sp
 import warnings
-
-from six.moves import xrange  # pylint: disable=redefined-builtin
 
 from matrix.signal_matrix import SignalMatrix
 
