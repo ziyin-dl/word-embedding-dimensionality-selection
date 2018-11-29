@@ -3,10 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import os
 import cPickle as pickle
-from six.moves import xrange  # pylint: disable=redefined-builtin
-import subprocess as sp
 from multiprocessing import Pool
 
 def _lower(s):
