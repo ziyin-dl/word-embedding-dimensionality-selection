@@ -2,6 +2,10 @@
 
 This repo implements the dimensionality selection procedure for word embeddings. The procedure is proposed
 in the following papers, based on the notion of Pairwise Inner Produce (PIP) loss. No longer pick 300 as your word embedding dimensionality!
+
+- Paper: https://nips.cc/Conferences/2018/Schedule?showEvent=12567
+- Slides: https://www.dropbox.com/s/9tix9l4h39k4agn/main.pdf?dl=0
+
 ```
 @inproceedings{yin2018dimensionality,
  title={On the Dimensionality of Word Embedding},
