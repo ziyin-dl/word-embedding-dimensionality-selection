@@ -5,6 +5,7 @@ in the following papers, based on the notion of Pairwise Inner Produce (PIP) los
 
 - Paper: https://nips.cc/Conferences/2018/Schedule?showEvent=12567
 - Slides: https://www.dropbox.com/s/9tix9l4h39k4agn/main.pdf?dl=0
+- Video of Neurips talk: https://www.facebook.com/nipsfoundation/videos/vb.375737692517476/745243882514297/?type=2&theater
 
 ```
 @inproceedings{yin2018dimensionality,
