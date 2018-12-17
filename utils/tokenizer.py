@@ -3,7 +3,10 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import cPickle as pickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 from multiprocessing import Pool
 
 def _lower(s):

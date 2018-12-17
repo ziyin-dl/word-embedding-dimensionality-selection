@@ -2,7 +2,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import cPickle as pickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -41,7 +44,7 @@ class SignalMatrix():
             plt.savefig('{}/sv.pdf'.format(self._param_dir))
             plt.close()
         self.spectrum = D
-        with open("{}/sv.pkl".format(self._param_dir), "w") as f:
+        with open("{}/sv.pkl".format(self._param_dir), "wb") as f:
             pickle.dump(self.spectrum, f)
 
     def estimate_noise(self):
