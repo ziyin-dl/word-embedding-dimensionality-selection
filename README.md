@@ -3,7 +3,9 @@
 This repo implements the dimensionality selection procedure for word embeddings. The procedure is proposed
 in the following papers, based on the notion of Pairwise Inner Produce (PIP) loss. No longer pick 300 as your word embedding dimensionality!
 
-- Paper: https://nips.cc/Conferences/2018/Schedule?showEvent=12567
+- Paper: 
+    * Conference Version: https://nips.cc/Conferences/2018/Schedule?showEvent=12567
+    * arXiv: https://arxiv.org/abs/1812.04224
 - Slides: https://www.dropbox.com/s/9tix9l4h39k4agn/main.pdf?dl=0
 - Video of Neurips talk: https://www.facebook.com/nipsfoundation/videos/vb.375737692517476/745243882514297/?type=2&theater
 
@@ -44,4 +46,4 @@ Run from root directory as package, e.g.:
 
 ## Implement your own
 You can extend the implementation if you have another embedding algorithm that is based on matrix factorization.
-The only thing to do is to implement your matrix estimator as a subclass of SignalMatrix
+The only thing to do is to implement your matrix estimator as a subclass of SignalMatrix.
