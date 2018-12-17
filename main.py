@@ -20,14 +20,14 @@ if __name__ == "__main__":
    
     config_file = args.config_file
 
+    with open(args.config_file, "r") as f:
+        cfg = yaml.load(f)
+
     reader = ReaderFactory.produce(args.file[-3:])
     data = reader.read_data(args.file)
     tokenizer = SimpleTokenizer()
-    indexed_corpus = tokenizer.do_index_data(data)
+    indexed_corpus = tokenizer.do_index_data(data, n_words=cfg.get('vocabulary_size'))
     factory = SignalMatrixFactory(indexed_corpus)
-
-    with open(config_file, "r") as f:
-        cfg = yaml.load(f)
 
     signal_matrix = factory.produce(args.algorithm.lower())
     path = signal_matrix.param_dir
