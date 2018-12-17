@@ -25,15 +25,17 @@ if __name__ == "__main__":
     tokenizer = SimpleTokenizer()
     indexed_corpus = tokenizer.do_index_data(data)
     factory = SignalMatrixFactory(indexed_corpus)
+
     with open(config_file, "r") as f:
         cfg = yaml.load(f)
+
     signal_matrix = factory.produce(args.algorithm.lower())
     path = signal_matrix.param_dir
     signal_matrix.inject_params(cfg)
     signal_matrix.estimate_signal()
     signal_matrix.estimate_noise()
     signal_matrix.export_estimates()
-    
+
     pip_calculator = MonteCarloEstimator()
     pip_calculator.get_param_file(path, "estimates.yml")
     pip_calculator.estimate_signal()

@@ -31,8 +31,9 @@ class LSAMatrix(SignalMatrix):
         for idx, center_word_id in enumerate(data):
             if center_word_id > vocabulary_size:
                 vocabulary_size = center_word_id
-            for i in range(max(idx - skip_window - 1, 0), idx) + range(idx + 1, min(idx + skip_window + 1, len(data))):
+            for i in range(max(idx - skip_window - 1, 0), min(idx + skip_window + 1, len(data))):
                 cooccurance_count[center_word_id][data[i]] += 1
+            cooccurance_count[center_word_id][center_word_id] -= 1
         return cooccurance_count, vocabulary_size
 
 

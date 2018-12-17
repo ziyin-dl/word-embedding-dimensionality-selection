@@ -2,7 +2,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import cPickle as pickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 import os
 import matplotlib
 matplotlib.use('Agg')
@@ -33,17 +36,17 @@ class MonteCarloEstimator():
 
     def get_param_file(self, param_path, filename):
         param_file = os.path.join(param_path, filename)
-        with open(param_file, "r") as f:
+        with open(param_file, "rb") as f:
             cfg = yaml.load(f)
         self.param_path = param_path
         self.alpha = float(cfg["alpha"])
         self.estimated_sigma = float(cfg["sigma"])
         self.lambda_filename = cfg["lambda"]
-        with open(os.path.join(param_path, self.lambda_filename), 'r') as f:
+        with open(os.path.join(param_path, self.lambda_filename), 'rb') as f:
             self.empirical_signal = pickle.load(f)
 
     def estimate_signal(self):
-        self.estimated_signal = map(lambda x: self._soft_threshold(x, 2 * self.estimated_sigma * np.sqrt(len(self.empirical_signal))), self.empirical_signal)
+        self.estimated_signal = list(map(lambda x: self._soft_threshold(x, 2 * self.estimated_sigma * np.sqrt(len(self.empirical_signal))), self.empirical_signal))
         rank = len(self.estimated_signal)
         for i in range(len(self.estimated_signal)):
             if self.estimated_signal[i] == 0:
@@ -113,7 +116,6 @@ class MonteCarloEstimator():
                 time_norm += time.time() - t0
                 frobenius_list_est_to_gt.append(sim_diff_est_to_gt)
             self.estimated_pip_loss = frobenius_list_est_to_gt
-            print("time_add={}, time_norm={}".format(time_add, time_norm))
         else:
             time_norm = 0.0
             frobenius_list_est_to_gt = [np.linalg.norm(spectrum ** 2) ** 2]
@@ -123,14 +125,13 @@ class MonteCarloEstimator():
                         np.linalg.norm(embed_est[:, keep_dim-1].T.dot(embed_gt)) ** 2)
                 time_norm += time.time() - t0
                 frobenius_list_est_to_gt.append(diff)
-            self.estimated_pip_loss = map(np.sqrt, frobenius_list_est_to_gt[1:])
-            print("time_add={}, time_norm={}".format(0.0, time_norm))
-        with open(os.path.join(self.param_path, "pip_loss_{}.pkl".format(self.alpha)), 'w') as f:
+            self.estimated_pip_loss = list(map(np.sqrt, frobenius_list_est_to_gt[1:]))
+        with open(os.path.join(self.param_path, "pip_loss_{}.pkl".format(self.alpha)), 'wb') as f:
             pickle.dump(self.estimated_pip_loss, f)
 
 
     def plot_pip_loss(self):
-        with open(os.path.join(self.param_path, "pip_loss_{}.pkl".format(self.alpha)), 'r') as f:
+        with open(os.path.join(self.param_path, "pip_loss_{}.pkl".format(self.alpha)), 'rb') as f:
             frobenius_list_est_to_gt = pickle.load(f)
         print("optimal dimensionality is {}".format(np.argmin(frobenius_list_est_to_gt)))
         fig = plt.figure()
@@ -138,7 +139,9 @@ class MonteCarloEstimator():
         ax.plot(frobenius_list_est_to_gt, 'aqua', label = r'PIP loss')
         lgd = ax.legend(loc='upper right')
         plt.title(r'PIP Loss')
-        fig.savefig('{}/pip_{}.pdf'.format(self.param_path, self.alpha), bbox_extra_artists=(lgd,), bbox_inches='tight')
+        fig_path = '{}/pip_{}.pdf'.format(self.param_path, self.alpha)
+        fig.savefig(fig_path, bbox_extra_artists=(lgd,), bbox_inches='tight')
+        print("a plot of the loss is saved at {}".format(fig_path))
         plt.close()
 
 
