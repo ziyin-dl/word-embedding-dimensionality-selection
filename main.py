@@ -26,7 +26,9 @@ if __name__ == "__main__":
     reader = ReaderFactory.produce(args.file[-3:])
     data = reader.read_data(args.file)
     tokenizer = SimpleTokenizer()
-    indexed_corpus = tokenizer.do_index_data(data, n_words=cfg.get('vocabulary_size'))
+    indexed_corpus = tokenizer.do_index_data(data,
+            n_words=cfg.get('vocabulary_size'),
+            min_count=cfg.get('min_count'))
     factory = SignalMatrixFactory(indexed_corpus)
 
     signal_matrix = factory.produce(args.algorithm.lower())
