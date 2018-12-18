@@ -4,3 +4,4 @@ skip_window: 5
 # neg_samples between 1-5 is suggested (Mikolov et al)
 neg_samples: 1
 vocabulary_size: 10000
+min_count: 100
