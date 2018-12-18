@@ -42,7 +42,7 @@ You need to have the following:
 
 Run from root directory as package, e.g.:
 
-`python -m main --file data/text8.zip --config_file word2vec_sample_config.yml --algorithm word2vec`
+`python -m main --file data/text8.zip --config_file config/word2vec_sample_config.yml --algorithm word2vec`
 
 ## Implement your own
 You can extend the implementation if you have another embedding algorithm that is based on matrix factorization.
