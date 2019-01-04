@@ -18,6 +18,7 @@ class SimpleTokenizer():
 
     def tokenize(self, data):    
         """data: str"""
+        data = data.replace('\n', ' ').replace('\r', '')
         splitted = data.split(' ')
         pool = Pool()
         tokenized = pool.map(_lower, splitted)
