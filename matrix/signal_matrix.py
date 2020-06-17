@@ -10,7 +10,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-import subprocess as sp
+import os
 
 from six.moves import xrange  # pylint: disable=redefined-builtin
 
@@ -19,7 +19,8 @@ class SignalMatrix():
     def __init__(self, corpus=None):
         self.corpus = corpus
         self._param_dir = "params/{}".format(self.__class__.__name__)
-        sp.check_output("mkdir -p {}".format(self._param_dir), shell=True)
+	if not os.path.exists(self._param_dir):
+            os.makedirs(self._param_dir)
         self._get_vocab_size()
 
     def _get_vocab_size(self):
